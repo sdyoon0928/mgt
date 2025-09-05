@@ -35,18 +35,7 @@
         <div class="form-group">
           <label for="id_child_name">아동 이름</label>
           {{ form.child_name }}
-        </div>
-        <div class="form-group">
-          <label for="id_age">나이</label>
-          {{ form.age }}
-        </div>
-        <div class="form-group">
-          <label for="id_gender">성별</label>
-          {{ form.gender }}
-        </div>
-        <div class="form-group">
-          <label for="id_attendance">출결 상태</label>
-          {{ form.attendance }}
+    
         </div>
         <div class="form-group">
           <label for="id_negative_language">부정 언어 표현</label>
@@ -63,19 +52,6 @@
           {{ form.contact_reaction }}
         </div>
 
-        <div class="form-group">
-          <label for="id_parental_aggression">보호자 공격성</label>
-          {{ form.parental_aggression }}
-        </div>
-
-        <div class="form-group">
-          <label for="id_income_level">소득 수준</label>
-          {{ form.income_level }}
-        </div>
-        <div class="form-group">
-          <label for="id_emotional_state">보호자 정서 상태</label>
-          {{ form.emotional_state }}
-        </div>
       </div>
       <div class="form-row">
         <button type="submit">예측하기</button>
@@ -108,13 +84,7 @@
         {% for record in observation_list %}
         <tr>
           <td>{{ record.observation_date }}</td>
-          <td>{{ record.child_name }}</td>
-          <td>{{ record.attendance }}</td>
-          <td>{{ record.negative_language }}</td>
-          <td>{{ record.parental_aggression }}</td>
-          <td>{{ record.contact_reaction }}</td>
-          <td>{{ record.sibling }}</td>
-          <td>{{ record.income_level }}</td>
+    
           <td>{{ record.emotional_state }}</td>
           <td>
             {% if record.is_danger %}

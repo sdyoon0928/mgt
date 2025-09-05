@@ -17,7 +17,7 @@ class ObservationForm(forms.ModelForm):
         label='성별'
     )
     attendance = forms.ChoiceField(
-        choices=[('정상', '정상'), ('자주결석', '자주결석'), ('불규칙', '불규칙')],
+        choices=[('정상', '정상'), ('자주결석', '자주결석')],
         label='출석 패턴'
     )
     negative_language = forms.ChoiceField(
@@ -25,7 +25,7 @@ class ObservationForm(forms.ModelForm):
         label='부정 언어 표현'
     )
     parental_aggression = forms.ChoiceField(
-        choices=[('없음', '없음'), ('약함', '약함'), ('강함', '강함')],
+        choices=[('없음', '없음'), ('약함', '약함')],
         label='보호자 공격성'
     )
         # 형제자매수 추가!
