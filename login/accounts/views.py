@@ -23,7 +23,7 @@ def signup_view(request):
         print("user.is_authenticated:", user.is_authenticated)
         print("user.username:", user.username)
 
-        messages.success(request, f'{username}님, 가입을 환영합니다!')
+        messages.success(request, f'{username}님, 가입을 축하합니다!')
         return redirect('/')
 
     return redirect('/')
@@ -50,5 +50,5 @@ def login_view(request):
 # 로그아웃 뷰
 def logout_view(request):
     logout(request)
-    messages.success(request, '성공적으로 로그아웃되었습니다.')
+    messages.success(request, '로그아웃이 성공적으로 완료되었습니다.')
     return redirect('/')
