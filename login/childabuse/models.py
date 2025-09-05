@@ -16,12 +16,12 @@ class ChildObservation(models.Model):
     age = models.IntegerField()
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     attendance = models.CharField(max_length=20, choices=ATTENDANCE_CHOICES)
-    negative_language = models.CharField(max_length=10, choices=NEG_LANG_CHOICES)
-    parental_aggression = models.CharField(max_length=10, choices=AGGRESSION_CHOICES)
-    contact_reaction = models.CharField(max_length=10, choices=CONTACT_CHOICES)
+    negative_language = models.CharField(max_length=30, choices=NEG_LANG_CHOICES)
+    parental_aggression = models.CharField(max_length=30, choices=AGGRESSION_CHOICES)
+    contact_reaction = models.CharField(max_length=30, choices=CONTACT_CHOICES)
     sibling = models.IntegerField()  # 형제자매수
-    income_level = models.CharField(max_length=10, choices=INCOME_CHOICES)
-    emotional_state = models.CharField(max_length=10, choices=EMOTION_CHOICES)
+    income_level = models.CharField(max_length=30, choices=INCOME_CHOICES)
+    emotional_state = models.CharField(max_length=40, choices=EMOTION_CHOICES)
 
     is_danger = models.BooleanField(default=False)
     reported = models.BooleanField(default=False)
