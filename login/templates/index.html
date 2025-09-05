@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>MOON chic 42 - 메인페이지</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
+  <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+</head>
+
+<body>
+  <div class="slider">
+    <div class="wrapper">
+        <div style="background-image: url('https://alikinvv.github.io/3d-carousel/build/img/slide2.jpg')" class="item item1 active">
+            <div class="item__info">
+                <p class="item__year"><span>2025 - ing </span></p>
+                <p class="item__name"><span>MOON chic 42</span></p>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="btn"><span>로그아웃</span></a>
+                {% else %}
+                    <a href="#" id="openLoginModal" class="btn"><span>접속</span></a>
+                {% endif %}
+            </div>
+        </div>
+        <div style="background-image: url('https://alikinvv.github.io/3d-carousel/build/img/slide1.jpg')" class="item item2">
+            <div class="item__info">
+                <p class="item__year"><span>moon chic 42</span></p>
+                <p class="item__name"><span>📁 관리자 페이지</span></p>
+                <a href="/dashboard/" class="btn"><span>아동 관찰 대시보드</span></a>
+            </div>
+        </div>
+        <div style="background-image: url('https://alikinvv.github.io/3d-carousel/build/img/slide3.jpg')" class="item item3">
+            <div class="item__info">
+                <p class="item__year"><span>moon chic 42</span></p>
+                <p class="item__name"><span>🏠 메인 페이지</span></p>
+                <a href="https://github.com/alikinvv/3d-carousel" target="_blank" class="btn"><span>참고 링크</span></a>
+            </div>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+      <div class="arrow arrow-next"></div>
+      <div class="arrow arrow-prev"></div>
+    {% endif %}
+  </div>
+
+  <!-- 로그인 모달 창 -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <img src="{% static 'images/modal-image.jpg' %}" alt="모달 이미지" class="modal-image">
+    <div class="center-form">
+      <h2>로그인</h2>
+      <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <input type="email" name="email" id="email" placeholder="아이디 입력" required>
+        <input type="password" name="password" id="password" placeholder="비밀번호 입력" required>
+        <div class="button-group">
+          <button type="submit" class="btn">로그인</button>
+          <button type="button" class="btn signup-btn">회원가입</button> <!-- 회원가입 모달 여는 버튼 -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- 회원가입 모달 창 -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <img src="{% static 'images/modal-image.jpg' %}" alt="모달 이미지" class="modal-image">
+    <div class="center-form">
+      <h2>회원가입</h2>
+      <form method="POST" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <input type="text" name="name" id="name" placeholder="이름" required>
+        <input type="email" name="email" id="signupEmail" placeholder="이메일" required>
+        <input type="password" name="password" id="signupPassword" placeholder="비밀번호" required>
+        <div class="button-group">
+          <button type="submit" class="btn">회원가입</button> <!-- 실제 form 제출 버튼 -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+  {% if user.is_authenticated %}
+    <script src="{% static 'js/index.js' %}"></script>
+  {% endif %}
+  <script src="{% static 'js/modal.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+/* 모달 배경 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  /* 모달 컨텐츠 */
+  .modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 0 auto; /* 모달 창 상단 여백 제거 */
+    padding: 0;
+    border-radius: 8px;
+    width: 50%;
+    height: 100%; /* 모달 창 높이를 화면 전체로 설정 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* 모달 이미지 */
+  .modal-image {
+    width: 100%;
+    height: 100%; /* 이미지를 모달 창 높이와 동일하게 설정 */
+    object-fit: cover; /* 이미지를 창에 꽉 채우도록 설정 */
+    border-radius: 8px;
+    z-index: 1; /* 이미지 뒤에 배치 */
+  }
+  
+ /* 중앙에 위치한 폼 */
+.center-form {
+    position: absolute;
+    top: 50%; /* 화면 중앙 */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; /* 폼 전체 너비 */
+    text-align: center;
+    z-index: 2; /* 폼 자체의 이미지 위 위치 */
+  }
+  
+  .center-form h2 {
+    position: relative; /* "로그인" 텍스트를 상위 레이어로 배치 */
+    margin: 0 auto 20px auto; /* 입력창과 버튼 간 간격 추가 */
+    color: #ffffff; /* 텍스트 색상 */
+    font-size: 40px; /* 텍스트 크기 */
+    font-weight: bold; /* 텍스트 두께 설정 */
+    z-index: 3; /* 입력창 및 버튼보다 상위 레이어로 설정 */
+  }
+  
+  .center-form input {
+    width: 80%; /* 입력 창 너비 */
+    padding: 12px; /* 내부 여백 */
+    margin-bottom: 15px; /* 입력 필드 간 간격 */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .center-form button {
+    display: flex; /* Flexbox를 사용하여 내부 요소 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    width: 50%; /* 버튼 너비 입력 창과 동일 */
+    background-color: #c8d41e; /* 버튼 배경 색상 */
+    color: white;
+    padding: 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 30px;
+    margin-top: 10px; /* 버튼 상단 간격 추가 */
+  }
+  
+  .center-form button:hover {
+    background-color: #45a049; /* 호버 시 배경색 */
+  }
+  
+  /* 닫기 버튼 */
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+ /* 버튼 그룹 스타일 */
+.button-group {
+    display: flex; /* 버튼을 가로로 정렬 */
+    justify-content: center; /* 그룹을 중앙 정렬 */
+    gap: 15px; /* 버튼 사이 간격 */
+  }
+  
+  .button-group .btn {
+    display: flex;
+    justify-content: center; /* 버튼 내부 텍스트를 중앙 정렬 */
+    align-items: center; /* 버튼 텍스트를 세로로 중앙 정렬 */
+    width: 40%; /* 각 버튼의 너비 */
+    background-color: #c8d41e; /* 로그인 버튼 배경 색상 */
+    color: white;
+    padding: 40px; /* 버튼 내부 여백 */
+    border: none; /* 테두리 제거 */
+    border-radius: 5px; /* 둥근 버튼 */
+    font-size: 40px; /* 텍스트 크기 */
+    cursor: pointer;
+  }
+  
+  .button-group .signup-btn {
+    background-color: #d226e9; /* 회원가입 버튼 배경 색상 */
+  }
+  
+  .button-group .btn:hover {
+    background-color: #45a049; /* 로그인 버튼 호버 효과 */
+  }
+  
+  .button-group .signup-btn:hover {
+    background-color: #1976D2; /* 회원가입 버튼 호버 효과 */
+  }
+  
+ 

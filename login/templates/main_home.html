@@ -1,0 +1,146 @@
+
+
+<!DOCTYPE html>
+<html lang="ko">
+{% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>아동학대 조기 발견 대시보드</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>👶 아동학대 조기 발견 솔루션</h1>
+    <nav>
+      <a href="{% url 'form_view' %}" style="margin-right: 20px;">✍️ 단건 입력</a>
+      <a href="{% url 'bulk_form_view' %}">📂 일괄 업로드</a>
+    </nav>
+  </header>
+
+  <!-- 3컬럼 현황 카드 -->
+  <section class="summary">
+    <div class="card"><h2>총 아동 수</h2><p id="total-kids">{{ total_kids }}명</p></div>
+    <div class="card warning"><h2>위험 의심 아동</h2><p id="danger-count">{{ danger_kids }}명</p></div>
+    <div class="card"><h2>모델 정확도</h2><p>{{ last_report_date }}</p></div>
+  </section>
+
+
+  <!-- 예측 입력 폼 (1행) -->
+  <section class="input-form">
+    <h2>📌 오늘의 관찰 기록 입력</h2>
+    <form method="post" action="{% url 'home' %}">
+      {% csrf_token %}
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="id_child_name">아동 이름</label>
+          {{ form.child_name }}
+        </div>
+        <div class="form-group">
+          <label for="id_age">나이</label>
+          {{ form.age }}
+        </div>
+        <div class="form-group">
+          <label for="id_gender">성별</label>
+          {{ form.gender }}
+        </div>
+        <div class="form-group">
+          <label for="id_attendance">출결 상태</label>
+          {{ form.attendance }}
+        </div>
+        <div class="form-group">
+          <label for="id_negative_language">부정 언어 표현</label>
+          {{ form.negative_language }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_sibling">형제자매 수</label>
+          {{ form.sibling }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_contact_reaction">신체 접촉 반응</label>
+          {{ form.contact_reaction }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_parental_aggression">보호자 공격성</label>
+          {{ form.parental_aggression }}
+        </div>
+
+        <div class="form-group">
+          <label for="id_income_level">소득 수준</label>
+          {{ form.income_level }}
+        </div>
+        <div class="form-group">
+          <label for="id_emotional_state">보호자 정서 상태</label>
+          {{ form.emotional_state }}
+        </div>
+      </div>
+      <div class="form-row">
+        <button type="submit">예측하기</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- 누적 테이블 -->
+  <section class="table-section">
+    <h2>📝 관찰 리스트</h2>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>날짜</th>
+          <th>아동 이름</th>
+          <th>출결</th>
+          <th>부정언어</th>
+          <th>보호자공격성</th>
+          <th>신체반응</th>
+          <th>형제수</th>
+          <th>소득</th>
+          <th>정서</th>
+          <th>위험여부</th>
+          <th>학대 가능성</th>
+          <th>신고</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in observation_list %}
+        <tr>
+          <td>{{ record.observation_date }}</td>
+          <td>{{ record.child_name }}</td>
+          <td>{{ record.attendance }}</td>
+          <td>{{ record.negative_language }}</td>
+          <td>{{ record.parental_aggression }}</td>
+          <td>{{ record.contact_reaction }}</td>
+          <td>{{ record.sibling }}</td>
+          <td>{{ record.income_level }}</td>
+          <td>{{ record.emotional_state }}</td>
+          <td>
+            {% if record.is_danger %}
+              <span class="danger">위험</span>
+            {% else %}
+              정상
+            {% endif %}
+          </td>
+          <td>
+            {% with record.child_name as name %}
+              {% for history in predictionhistory_list %}
+                {% if history.child_name == name %}
+                  {{ history.predicted_prob }}%
+                {% endif %}
+              {% endfor %}
+            {% endwith %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <form method="post" action="{% url 'reset_dashboard' %}" onsubmit="return confirm('정말 초기화하시겠습니까?');">
+      {% csrf_token %}
+      <button type="submit" style="margin-top: 1rem; background-color: rgb(76, 112, 231); color: white;">
+        🗑️ 초기화
+      </button>
+  </section>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>CSV 일괄 예측</title>
+</head>
+<body>
+  <h1>📂 CSV 파일로 아동 위험 일괄 예측</h1>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>
+      CSV 파일 업로드:
+      <input type="file" name="csv_file" accept=".csv" required>
+    </label>
+    {% if filename %}
+      <span style="margin-left: 10px; color: #555;">📄 {{ filename }}</span>
+    {% endif %}
+    <br><br>
+    <button type="submit">예측하기</button>
+  </form>
+
+  {% if results %}
+    <h2>
+      📊 예측 결과
+      {% if accuracy %}
+        <span style="font-size: 0.8em; color: gray;">
+          (정확도: {{ accuracy|floatformat:2 }})
+        </span>
+      {% endif %}
+    </h2>
+
+    <table border="1">
+      <thead>
+        <tr>
+          {% for key in results.0.keys %}
+            <th>{{ key }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in results %}
+          {% comment %} '가정폭력 위험'인 경우 행 전체에 색상 적용 {% endcomment %}
+          {% if row.예측결과 == '가정폭력 위험이 있습니다' %}
+            <tr style="background-color: #ffe6ea;">
+          {% else %}
+            <tr>
+          {% endif %}
+            {% for value in row.values %}
+              <td>{{ value }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</body>
+</html>
